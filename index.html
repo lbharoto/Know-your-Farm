@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AMIRA: APLIKASI MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</title>
+<title>AMIRA: AI UNTUK MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</title>
 <style>
 :root {
   color-scheme: light;
@@ -49,12 +49,12 @@ h1 .navy { color: var(--navy); } h1 .green { color: var(--green); }
 .card .hint { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
 
 /* filters */
-.filters { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px 12px; align-items: end; margin-bottom: 16px; }
+.filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 12px; align-items: end; margin-bottom: 16px; }
 .filters label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--ink2); }
 .filters select, .filters input[type=search] { font: inherit; font-size: 13px; color: var(--ink);
   background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: 6px 9px; min-width: 140px; }
 .filters .check { flex-direction: row; align-items: center; justify-content: center; gap: 6px; padding: 7px 0; font-size: 13px; color: var(--ink); white-space: nowrap; }
-.filters label.search { grid-column: span 4; }
+.filters label.search { grid-column: span 2; }
 .filters select, .filters input[type=search], .filters .btn { width: 100%; min-width: 0; }
 @media (max-width: 900px) { .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } .filters label.search { grid-column: span 2; } }
 .btn { font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 1px solid var(--axis);
@@ -220,7 +220,7 @@ th { background: var(--tint-blue); color: var(--navy); }
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><svg class="cloud c1" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><svg class="cloud c2" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><h1><span class="navy">AMIRA:</span> <span class="green">APLIKASI MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</span></h1>
+  <header class="top"><svg class="cloud c1" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><svg class="cloud c2" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><h1><span class="navy">AMIRA:</span> <span class="green">AI UNTUK MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</span></h1>
   <p class="sub">Public Instagram profiles, classified by AI. Generated 2026-10-01. Click any bar to filter; click a row for detail.</p></header>
 
   <div class="filters" role="group" aria-label="Filters">
