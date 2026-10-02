@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Know Your Farm</title>
+<title>AMIRA: APLIKASI MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</title>
 <style>
 :root {
   color-scheme: light;
@@ -220,16 +220,14 @@ th { background: var(--tint-blue); color: var(--navy); }
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><svg class="cloud c1" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><svg class="cloud c2" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><h1><span class="navy">Know Your</span> <span class="green">Farm</span></h1>
+  <header class="top"><svg class="cloud c1" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><svg class="cloud c2" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M22 44a15 15 0 0 1 3-29 22 22 0 0 1 42-5 17 17 0 0 1 31 11 13 13 0 0 1 2 23z"/></svg><h1><span class="navy">AMIRA:</span> <span class="green">APLIKASI MANAJEMEN INFORMASI DAN REKOMENDASI PENERIMA PI-KEKDA</span></h1>
   <p class="sub">Public Instagram profiles, classified by AI. Generated 2026-10-01. Click any bar to filter; click a row for detail.</p></header>
 
   <div class="filters" role="group" aria-label="Filters">
-    <label>Business type <select id="fBiz"></select></label>
     <label>Category <select id="fCat"></select></label>
     <label>Commodity <select id="fComm"></select></label>
-    <label>Activity <select id="fAct"></select></label>
     <label>KPwDN <select id="fKpw"></select></label>
-    <label>Likely need <select id="fNeed"></select></label>
+    <label>Kebutuhan sarpras <select id="fNeed"></select></label>
     <label class="search">Search <input type="search" id="fQ" placeholder="name, region, bio…"></label>
     <label class="check"><input type="checkbox" id="fRel" checked> Relevant only</label>
     <button class="btn" id="fReset" type="button">Reset</button>
@@ -239,9 +237,9 @@ th { background: var(--tint-blue); color: var(--navy); }
     <div class="leftcol">
     <div class="tiles" id="tiles"></div>
       <section class="card"><h2>Commodity</h2><p class="hint">Top 3 commodities by number of groups. A group naming several counts under each.</p><div class="bars" id="cComm"></div></section>
-    <section class="card"><h2>Likely needs</h2><p class="hint">Top 3 items from the incentive list, by number of groups. Mostly inferred, so treat as leads.</p><div class="bars" id="cNeed"></div></section>
+    <section class="card"><h2>Kebutuhan sarpras</h2><p class="hint">Top 3 items from the incentive list, by number of groups. Mostly inferred, so treat as leads.</p><div class="bars" id="cNeed"></div></section>
     </div>
-    <section class="card spanmap"><h2>Responsible KPwDN</h2><p class="hint">Where each group's KPwDN office is. Bigger bubble = more groups. Click a bubble to filter.</p><div id="cKpw"></div><p class="hint" id="kpwNote" style="margin:6px 0 0"></p></section>
+    <section class="card spanmap"><h2>Sebaran KPwDN</h2><p class="hint">Where each group's KPwDN office is. Bigger bubble = more groups. Click a bubble to filter.</p><div id="cKpw"></div><p class="hint" id="kpwNote" style="margin:6px 0 0"></p></section>
   </div>
 
 
@@ -533,19 +531,15 @@ function fillSelect(sel, values, allLabel, current) {
 }
 function buildFilters() {
   const uniq = (k) => [...new Set(ROWS.map((r) => r[k]))].sort();
-  fillSelect($('#fBiz'), uniq('biz').filter((b) => b === 'budidaya' || b === 'pengolahan'), 'All', state.biz);
   const pool = ROWS.filter((r) => r.relevant);
   fillSelect($('#fCat'), [...new Set(pool.flatMap((r) => r.cats))].sort(), 'All categories', state.cat);
   fillSelect($('#fComm'), [...new Set(pool.flatMap((r) => r.commodities))].sort(), 'All commodities', state.comm);
-  fillSelect($('#fAct'), ACT_ORDER, 'All', state.act);
   fillSelect($('#fKpw'), uniq('kpw'), 'All KPwDN', state.kpw);
   fillSelect($('#fNeed'), [...new Set(ROWS.flatMap((r) => r.needs))].sort(), 'Any item', state.need);
 }
 $('#fRel').addEventListener('change', (e) => { state.rel = e.target.checked; render(); });
-$('#fBiz').addEventListener('change', (e) => { state.biz = e.target.value; render(); });
 $('#fCat').addEventListener('change', (e) => { state.cat = e.target.value; render(); });
 $('#fComm').addEventListener('change', (e) => { state.comm = e.target.value; render(); });
-$('#fAct').addEventListener('change', (e) => { state.act = e.target.value; render(); });
 $('#fKpw').addEventListener('change', (e) => { state.kpw = e.target.value; render(); });
 $('#fNeed').addEventListener('change', (e) => { state.need = e.target.value; render(); });
 $('#fQ').addEventListener('input', (e) => { state.q = e.target.value; render(); });
@@ -553,7 +547,7 @@ $('#fReset').addEventListener('click', () => {
   Object.assign(state, { rel: true, biz: '', cat: '', comm: '', act: '', kpw: '', need: '', q: '' });
   $('#fRel').checked = true; $('#fQ').value = ''; buildFilters(); render();
 });
-function syncSelects() { $('#fBiz').value = state.biz; $('#fCat').value = state.cat; $('#fComm').value = state.comm; $('#fAct').value = state.act; $('#fKpw').value = state.kpw; $('#fNeed').value = state.need; }
+function syncSelects() { $('#fCat').value = state.cat; $('#fComm').value = state.comm; $('#fKpw').value = state.kpw; $('#fNeed').value = state.need; }
 
 // ---- tiles ----
 function tile(label, value, note, hero) {
@@ -563,7 +557,7 @@ function tile(label, value, note, hero) {
 function renderTiles(rows) {
   const n = rows.length, pct = (k) => n ? Math.round(100 * k / n) + '%' : '–';
   $('#tiles').replaceChildren(
-    tile('Potential Farmer Groups', fmt(n), `of ${fmt(ROWS.length)} profiles collected`, true));
+    tile('Kelompok Potensial', fmt(n), `of ${fmt(ROWS.length)} profiles collected`, true));
 }
 
 // ---- Indonesia map: one bubble per KPwDN office ----
@@ -747,7 +741,7 @@ function needsBlock(r) {
   const stated = items.filter((i) => i.tag === 'stated').length;
   return el('div', { class: 'needs' },
     el('div', { class: 'needs-head' },
-      el('span', { class: 'needs-title', text: `Likely needs · ${items.length} items` }),
+      el('span', { class: 'needs-title', text: `Kebutuhan sarpras · ${items.length} items` }),
       el('span', { class: 'needs-sub', text: `${stated} stated in the profile, ${items.length - stated} inferred by AI. Verify with the group.` })),
     el('div', { class: 'needs-list' }, ...items.map((i) =>
       el('div', { class: 'need' },
